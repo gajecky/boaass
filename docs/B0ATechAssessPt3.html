@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.4.7.2 (Linux)"/>
+	<meta name="created" content="2024-07-26T12:58:19.526793279"/>
+	<meta name="changed" content="2024-07-26T13:01:05.012756462"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		h2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Serif", serif; font-size: 18pt; font-weight: bold }
+		h2.cjk { font-family: "Noto Sans"; font-size: 18pt; font-weight: bold }
+		h2.ctl { font-family: "FreeSans"; font-size: 18pt; font-weight: bold }
+		h3 { margin-top: 0.1in; margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h3.western { font-family: "Liberation Serif", serif; font-size: 14pt; font-weight: bold }
+		h3.cjk { font-family: "Noto Sans"; font-size: 14pt; font-weight: bold }
+		h3.ctl { font-family: "FreeSans"; font-size: 14pt; font-weight: bold }
+		strong { font-weight: bold }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><h2 class="western">
+Configuration Management with Ansible</h2>
+<h3 class="western">Ansible Playbook for Web Server Deployment</h3>
+<p><strong>Assumptions:</strong></p>
+<ul>
+	<li><p style="margin-bottom: 0in">A base operating system (e.g.,
+	Ubuntu) is already installed on the virtual machine. 
+	</p>
+	<li><p style="margin-bottom: 0in">Ansible is installed on the
+	control machine. 
+	</p>
+	<li><p>Necessary SSH keys are configured for passwordless access. 
+	</p>
+</ul>
+<p><strong>Playbook (deploy_webserver.yml):</strong></p>
+<p style="line-height: 100%; margin-bottom: 0in">- name: Deploy a Web
+Server</p>
+<p style="line-height: 100%; margin-bottom: 0in">  hosts: webservers</p>
+<p style="line-height: 100%; margin-bottom: 0in">  become: yes</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">  tasks:</p>
+<p style="line-height: 100%; margin-bottom: 0in">    - name: Update
+package lists</p>
+<p style="line-height: 100%; margin-bottom: 0in">      apt:</p>
+<p style="line-height: 100%; margin-bottom: 0in">       
+update_cache: yes</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">    - name: Install
+Apache2</p>
+<p style="line-height: 100%; margin-bottom: 0in">      apt:</p>
+<p style="line-height: 100%; margin-bottom: 0in">        name:
+apache2</p>
+<p style="line-height: 100%; margin-bottom: 0in">        state:
+present</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">    - name: Start
+Apache2 service</p>
+<p style="line-height: 100%; margin-bottom: 0in">      service:</p>
+<p style="line-height: 100%; margin-bottom: 0in">        name:
+apache2</p>
+<p style="line-height: 100%; margin-bottom: 0in">        state:
+started</p>
+<p style="line-height: 100%; margin-bottom: 0in">        enabled: yes</p>
+<p style="line-height: 100%; margin-bottom: 0in"><br/>
+
+</p>
+<p style="line-height: 100%; margin-bottom: 0in">    - name: Copy
+index.html</p>
+<p style="line-height: 100%; margin-bottom: 0in">      copy:</p>
+<p style="line-height: 100%; margin-bottom: 0in">        src:
+index.html</p>
+<p style="line-height: 100%; margin-bottom: 0in">        dest:
+/var/www/html/</p>
+<p style="line-height: 100%; margin-bottom: 0in">        owner: root</p>
+<p style="line-height: 100%; margin-bottom: 0in">        group:
+www-data</p>
+<p style="line-height: 100%; margin-bottom: 0in">        mode: '0644'</p>
+</body>
+</html>
