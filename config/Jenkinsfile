@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Security Scan') {
+            steps {
+                sh 'snyk test' // Replace with your security scanning tool
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script {
+                    // Replace with Azure deployment script or plugin
+                    azureWebAppDeployment(
+                        appService: 'myWebApp',
+                        packagePath: 'target/*.war'
+                    )
+                }
+            }
+        }
+    }
+}
+

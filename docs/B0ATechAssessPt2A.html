@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.4.7.2 (Linux)"/>
+	<meta name="created" content="2024-07-26T11:06:13.744483151"/>
+	<meta name="changed" content="2024-07-26T14:48:12.901207974"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		h2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Serif", serif; font-size: 18pt; font-weight: bold }
+		h2.cjk { font-family: "Noto Sans"; font-size: 18pt; font-weight: bold }
+		h2.ctl { font-family: "FreeSans"; font-size: 18pt; font-weight: bold }
+		h3 { margin-top: 0.1in; margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h3.western { font-family: "Liberation Serif", serif; font-size: 14pt; font-weight: bold }
+		h3.cjk { font-family: "Noto Sans"; font-size: 14pt; font-weight: bold }
+		h3.ctl { font-family: "FreeSans"; font-size: 14pt; font-weight: bold }
+		pre { font-family: "Liberation Mono", monospace; font-size: 10pt; background: transparent }
+		strong { font-weight: bold }
+		code { font-family: "Liberation Mono", monospace }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><h2 class="western">
+Docker Security Best Practices</h2>
+<p>When deploying microservices with Docker, security must be a
+priority to ensure that the container environment is safe from
+potential threats. 
+</p>
+<h3 class="western">1. <strong>Use Minimal Base Images</strong></h3>
+<p>Start with a base image that only contains essential packages to
+reduce the attack surface by minimizing the packages and
+vulnerabilities present. Alpine Linux is a common choice for minimal
+base images.</p>
+<h3 class="western">2. <strong>Run Containers as Non-Root Users</strong></h3>
+<p>Running containers as non-root users prevents privilege escalation
+attacks. This reduces the potential damage if a container is
+compromised.</p>
+<h3 class="western">3. <strong>Keep Images and Containers Updated</strong></h3>
+<p>Regularly scan images for known vulnerabilities to identify and
+address security risks before deployment.</p>
+<h3 class="western">4. <strong>Implement Resource Limits</strong></h3>
+<p>Define resource limits for CPU and memory to prevent
+denial-of-service attacks. This ensures that no single container can
+consume all the host's resources, maintaining the availability of
+other services.</p>
+<h3 class="western">5. Leverage Immutable Infrastructure</h3>
+<p>Treat container images as immutable artifacts, preventing
+modifications after creation. This helps maintain consistency and
+security.</p>
+<p><strong>Dockerfile Example:</strong></p>
+<pre><code>FROM alpine:latest</code>
+
+<code># Create a non-root user</code>
+<code>RUN adduser -u 1000 appuser</code>
+
+<code># Set the working directory</code>
+<code>WORKDIR /app</code>
+
+<code># Copy application files</code>
+<code>COPY --chown=appuser:appgroup . /app</code>
+
+<code># Set the user to appuser</code>
+<code>USER appuser</code>
+
+<code># Command to run the application</code>
+<code>CMD [&quot;app&quot;]</code></pre><p>
+<br/>
+<br/>
+
+</p>
+</body>
+</html>

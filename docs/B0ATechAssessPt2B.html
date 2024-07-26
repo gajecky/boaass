@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.4.7.2 (Linux)"/>
+	<meta name="created" content="2024-07-26T12:17:25.168973652"/>
+	<meta name="changed" content="2024-07-26T12:41:44.285921335"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 0.79in }
+		p { line-height: 115%; margin-bottom: 0.1in; background: transparent }
+		h2 { margin-top: 0.14in; margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h2.western { font-family: "Liberation Serif", serif; font-size: 18pt; font-weight: bold }
+		h2.cjk { font-family: "Noto Sans"; font-size: 18pt; font-weight: bold }
+		h2.ctl { font-family: "FreeSans"; font-size: 18pt; font-weight: bold }
+		h3 { margin-top: 0.1in; margin-bottom: 0.08in; background: transparent; page-break-after: avoid }
+		h3.western { font-family: "Liberation Serif", serif; font-size: 14pt; font-weight: bold }
+		h3.cjk { font-family: "Noto Sans"; font-size: 14pt; font-weight: bold }
+		h3.ctl { font-family: "FreeSans"; font-size: 14pt; font-weight: bold }
+		pre { font-family: "Liberation Mono", monospace; font-size: 10pt; background: transparent }
+		strong { font-weight: bold }
+		code { font-family: "Liberation Mono", monospace }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><h2 class="western">
+Kubernetes Security Features</h2>
+<p>Kubernetes offers several security features to protect
+containerized applications. Here are three key features:</p>
+<h3 class="western">1. <strong>Role-Based Access Control (RBAC)</strong></h3>
+<p>RBAC is a mechanism in Kubernetes for controlling access to the
+Kubernetes API. It allows administrators to define roles and
+permissions, ensuring that users and applications have the minimum
+necessary access to perform their tasks.</p>
+<h3 class="western">2. <strong>Network Policies</strong></h3>
+<p>These define network communication rules between pods, preventing
+unauthorized traffic flow. They enable fine-grained control over
+ingress and egress traffic, limiting exposure and reducing the attack
+surface.</p>
+<h3 class="western">3. <strong>Pod Security Policies (PSP)</strong></h3>
+<p>Pod Security Policies enforce security constraints on pods, such
+as running as non-root, preventing privileged containers, and
+controlling resource usage.</p>
+<h2 class="western">Kubernetes YAML Configuration with
+SecurityContext</h2>
+<pre><code>apiVersion: v1</code>
+<code>kind: Pod</code>
+<code>metadata:</code>
+<code>  name: my-pod</code>
+<code>spec:</code>
+<code>  containers:</code>
+<code>  - name: my-container</code>
+<code>    image: my-image</code>
+<code>    securityContext:</code>
+<code>      privileged: false</code>
+<code>      runAsNonRoot: true</code>
+<code>      capabilities:</code>
+<code>        drop:</code>
+<code>        - ALL</code></pre><p style="line-height: 100%; margin-bottom: 0in">
+<br/>
+
+</p>
+</body>
+</html>
