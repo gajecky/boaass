@@ -14,9 +14,16 @@ pipeline {
         }
         stage('Security Scan') {
             steps {
-                sh 'snyk test' // Replace with your security scanning tool
+                script {
+                    // Replace with your Azure Static Code Analysis configuration
+                    def credentialsId = 'azure-credentials' // Replace with your credentials ID
+                    withAzureCredentials(credentialsId: credentialsId) {
+                        sh 'az static-code-analysis scan --organization <org-name> --project <project-name> --repo <repo-name> --path <path-to-code> --output-format json'
+                    }
+                }
             }
         }
+
         stage('Deploy') {
             steps {
                 script {
